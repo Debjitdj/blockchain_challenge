@@ -1,0 +1,21 @@
+/* .Body {
+    height: 90vh;
+    width: 100vw;
+    background-image: url('../media/bg1.png');
+    background-size: 50vh;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center 35vh; 
+    opacity: 0.2;
+} */
+
+.Background-image {
+  z-index: 1;
+  position: absolute;
+  left: 33vw;
+  width: 33vw;
+  height: 33vw;
+  margin-top: 15vh;
+  opacity: 0.2;
+}
+  
