@@ -1,0 +1,19 @@
+.sent-received {
+    display: inline-block;
+    width: 20vw;
+}
+
+.bitcoin-address {
+    display: inline-block;
+    width: 20vw;
+}
+
+.transaction-timestamp {
+    display: inline-block;
+    width: 20vw;
+}
+
+.transaction-amount {
+    display: inline-block;
+    width: 20vw;
+}

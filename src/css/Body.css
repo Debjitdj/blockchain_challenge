@@ -11,7 +11,7 @@
 
 .Background-image {
   z-index: 1;
-  position: absolute;
+  position: fixed;
   left: 33vw;
   width: 33vw;
   height: 33vw;
