@@ -56,6 +56,9 @@ class Search extends Component {
 
         if (request.status >= 200 && request.status < 400) {
           if(this.props.allTransactionList[0]['time'] != this.convertTime(data.txs[0].time)){
+            if(this.props.allTransactionList[0]['time'] != 0){
+              alert("There are some new Transactions!");
+            }
             this.props.updateBitcoinAccountBalance(data.final_balance);
             var newTransactionList = new Array();
             var receivedTransactionList = new Array();
@@ -99,14 +102,17 @@ class Search extends Component {
     }
 
     getTransactions = (address) => {
+      if(this.props.oldIntervalReference != -1){
+        clearInterval(this.props.oldIntervalReference);
+      }
       this.props.updateEmptySearch(false);
       var counter = 1;
       this.createTransactionLists(address,counter);
-      setInterval(() => {
+      var refreshId = setInterval(() => {
         counter++;
         this.createTransactionLists(address,counter);
       }, 10000);
-
+      this.props.updateNewIntervalReference(refreshId);
     }
 
     render() {

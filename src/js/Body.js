@@ -15,12 +15,14 @@ class Body extends Component {
         newTransactionList: [],
         allTransactionList: [{
           'time': 0
-        }]
+        }],
+        oldIntervalReference: -1
       }
       this.updateBitcoinAddress= this.updateBitcoinAddress.bind(this);
       this.updateBitcoinAccountBalance=this.updateBitcoinAccountBalance.bind(this);
       this.updateOldTransactionList=this.updateOldTransactionList.bind(this);
       this.updateNewTransactionList=this.updateNewTransactionList.bind(this);
+      this.updateNewIntervalReference=this.updateNewIntervalReference.bind(this);
     }
     updateEmptySearch = (input) => {
       this.setState({emptySearch: input});
@@ -45,6 +47,10 @@ class Body extends Component {
       this.setState({allTransactionList: list});
     }
 
+    updateNewIntervalReference = (refreshId) => {
+      this.setState({oldIntervalReference: refreshId});
+    }
+
     render() {
       return (
         <div className="Body">
@@ -61,6 +67,8 @@ class Body extends Component {
             newTransactionList={this.state.newTransactionList}
             allTransactionList={this.state.allTransactionList}
             updateEmptySearch={this.updateEmptySearch}
+            oldIntervalReference={this.state.oldIntervalReference}
+            updateNewIntervalReference={this.updateNewIntervalReference}
           />
           <Details
             address={this.state.address}
