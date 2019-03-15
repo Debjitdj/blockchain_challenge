@@ -43,9 +43,9 @@ class Search extends Component {
       var convdataTime = month+'-'+day+'-'+year+' '+hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
       return convdataTime;
      }
-
-    getTransactions = (address) => {
-
+    
+    createTransactionLists = (address, counter) => {
+      console.log(counter);
       var request = new XMLHttpRequest();
 
       request.open('GET', 'https://blockchain.info/rawaddr/'+address+'?cors=true', true);
@@ -55,21 +55,40 @@ class Search extends Component {
         var data = JSON.parse(request.response);
 
         if (request.status >= 200 && request.status < 400) {
-          this.props.updateBitcoinAccountBalance(data.final_balance);
-          var transactionList = new Array();
-          for(var i=0; i<data.txs.length; i++){
-            var outputList = data.txs[i].out;
-            for(var j=0; j<outputList.length; j++){
-              var newTransaction = {};
-              newTransaction['value'] = outputList[j].value;
-              newTransaction['spent'] = ( outputList[j].spent ? 'Sent' : 'Received' );
-              newTransaction['addr'] = outputList[j].addr;
-              newTransaction['time'] = this.convertTime(data.txs[i].time);
-              transactionList.push(newTransaction);
+          if(this.props.allTransactionList[0]['time'] != this.convertTime(data.txs[0].time)){
+            this.props.updateBitcoinAccountBalance(data.final_balance);
+            var newTransactionList = new Array();
+            var receivedTransactionList = new Array();
+            for(var i=0; i<data.txs.length; i++){
+              var outputList = data.txs[i].out;
+              for(var j=0; j<outputList.length; j++){
+                var transaction = {};
+                transaction['value'] = outputList[j].value;
+                transaction['spent'] = ( outputList[j].spent ? 'Sent' : 'Received' );
+                transaction['addr'] = outputList[j].addr;
+                transaction['time'] = this.convertTime(data.txs[i].time);
+                receivedTransactionList.push(transaction);
+              }
             }
+            if(counter === 1){
+              this.props.updateNewTransactionList([]);
+              this.props.updateOldTransactionList(receivedTransactionList);
+              this.props.updateAllTransactionList(receivedTransactionList);
+            }
+            else{
+              for(var i=0; i<receivedTransactionList.length; i++){
+                if(receivedTransactionList[i] != this.props.allTransactionList[0]){
+                  newTransactionList.push(receivedTransactionList[0]);
+                }
+                else{
+                  break;
+                }
+              }
+              this.props.updateNewTransactionList(newTransactionList);
+              this.props.updateOldTransactionList(this.props.allTransactionList);
+              this.props.updateAllTransactionList(receivedTransactionList); 
+            }       
           }
-          this.props.updateTransactionList(transactionList);
-          console.log(transactionList);
         }
         else {
           console.log('error');
@@ -77,6 +96,17 @@ class Search extends Component {
       }
       
       request.send();
+    }
+
+    getTransactions = (address) => {
+      this.props.updateEmptySearch(false);
+      var counter = 1;
+      this.createTransactionLists(address,counter);
+      setInterval(() => {
+        counter++;
+        this.createTransactionLists(address,counter);
+      }, 10000);
+
     }
 
     render() {

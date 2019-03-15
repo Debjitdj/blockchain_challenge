@@ -10,23 +10,39 @@ class Body extends Component {
       this.state = {
         address: '',
         balance: 0,
-        transactionList: []
+        emptySearch: true,
+        oldTransactionList: [],
+        newTransactionList: [],
+        allTransactionList: [{
+          'time': 0
+        }]
       }
       this.updateBitcoinAddress= this.updateBitcoinAddress.bind(this);
       this.updateBitcoinAccountBalance=this.updateBitcoinAccountBalance.bind(this);
-      this.updateTransactionList=this.updateTransactionList.bind(this);
+      this.updateOldTransactionList=this.updateOldTransactionList.bind(this);
+      this.updateNewTransactionList=this.updateNewTransactionList.bind(this);
     }
-
-    updateBitcoinAddress (newAddress) {
+    updateEmptySearch = (input) => {
+      this.setState({emptySearch: input});
+    }
+    updateBitcoinAddress = (newAddress) => {
       this.setState({address: newAddress});
     };
 
-    updateBitcoinAccountBalance(newBalance) {
+    updateBitcoinAccountBalance = (newBalance) => {
       this.setState({balance: newBalance});
     }
 
-    updateTransactionList(newList) {
-      this.setState({transactionList: newList});
+    updateOldTransactionList = (list) => {
+      this.setState({oldTransactionList: list});
+    }
+
+    updateNewTransactionList = (list) => {
+      this.setState({newTransactionList: list});
+    }
+
+    updateAllTransactionList = (list) => {
+      this.setState({allTransactionList: list});
     }
 
     render() {
@@ -36,14 +52,22 @@ class Body extends Component {
           <Search
             updateBitcoinAddress={this.updateBitcoinAddress}
             updateBitcoinAccountBalance={this.updateBitcoinAccountBalance}
-            updateTransactionList={this.updateTransactionList}
+            updateOldTransactionList={this.updateOldTransactionList}
+            updateNewTransactionList={this.updateNewTransactionList}
+            updateAllTransactionList={this.updateAllTransactionList}
             address={this.state.address}
             balance={this.state.balance}
+            oldTransactionList={this.state.oldTransactionList}
+            newTransactionList={this.state.newTransactionList}
+            allTransactionList={this.state.allTransactionList}
+            updateEmptySearch={this.updateEmptySearch}
           />
           <Details
             address={this.state.address}
             balance={this.state.balance}
-            transactionList={this.state.transactionList}
+            oldTransactionList={this.state.oldTransactionList}
+            newTransactionList={this.state.newTransactionList}
+            emptySearch={this.state.emptySearch}
           />
         </div>
       );

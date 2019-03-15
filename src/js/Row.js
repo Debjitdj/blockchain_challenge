@@ -11,6 +11,7 @@ class Row extends Component {
         <div className="row">
             <div className="sent-received">
                 {this.props.transaction["spent"]}
+                {(this.props.isNew ? 'NEW' : '')}
             </div>
             <div className="bitcoin-address">
                 {this.props.transaction["addr"]}
