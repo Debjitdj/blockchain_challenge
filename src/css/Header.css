@@ -1,3 +1,6 @@
+.header {
+  display: block; 
+}
 .App-header {
     background-color: rgb(21, 35, 67);
     min-height: 10vh;

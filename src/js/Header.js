@@ -4,7 +4,7 @@ import '../css/Header.css';
 class Header extends Component {
     render() {
       return (
-        <div className="Header">
+        <div className="header">
             <header className="App-header">
                 <div>
                     Front-end Engineer Code Challenge

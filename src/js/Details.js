@@ -12,6 +12,7 @@ class Details extends Component {
             <Row
                 transaction={transaction}
                 key={index}
+                id={index}
                 isNew={isNew}
             />
         )
@@ -36,20 +37,41 @@ class Details extends Component {
                 !this.props.emptySearch &&
                 <div className="details">
                     <div className="account-details">
-                        {this.props.balance}
+                        <div className="account-details-left-section">
+                            <div className="account-address">
+                                Bitcoin Address: {this.props.address}
+                            </div>
+                            <div className="account-hash160">
+                                Hash 160: {this.props.addressHash}
+                            </div>
+                        </div>
+                        <div className="account-details-right-section">
+                            <div className="total-received">
+                                Total Received: {this.props.totalReceived}
+                            </div>
+                            <div className="total-spent">
+                                Total Sent: {this.props.totalSent}
+                            </div>
+                            <div className="current-balance">
+                                Current Balance: {this.props.balance}
+                            </div>
+                        </div>
                     </div>
                     <div className="transaction-list-heading">
-                        <div className="sent-received">
-                            Sent/Received
+                        <div className="heading-transaction-date">
+                            <b>Date</b>
                         </div>
-                        <div className="bitcoin-address">
-                            Address
+                        <div className="heading-transaction-time">
+                            <b>Time</b>
                         </div>
-                        <div className="transaction-timestamp">
-                            TimeStamp
+                        <div className="heading-bitcoin-address">
+                            <b>Address</b>
                         </div>
-                        <div className="transaction-amount">
-                            BitCoin Amount
+                        <div className="heading-transaction-amount-received">
+                            <b>BitCoin Received</b>
+                        </div>
+                        <div className="heading-transaction-amount-sent">
+                            <b>BitCoin Sent</b>
                         </div>
                     </div>
                     {this.getTransactionRows()}

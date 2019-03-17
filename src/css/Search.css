@@ -4,9 +4,10 @@
     position: relative;
     margin-left: 20vw;
     margin-right: 20vw;
-    margin-top: 5vh;
-    margin-bottom: 5vh;
+    padding-top: 5vh;
+    padding-bottom: 5vh;
     z-index: 2;
+    height: 9vh;
     /* font-family: 'Open Sans', sans-serif; */
 }
 
@@ -19,7 +20,7 @@
     border-radius: 2vh;
     outline: none;
     color: #9DBFAF;
-    background: transparent;
+    /* background: transparent; */
     font-size: 1.5vw;
   }
   

@@ -1,19 +1,51 @@
-.sent-received {
+.row {
+    margin-left: 15vw;
+    margin-right: 15vw;
+    margin-bottom: 2vh; 
+    width: 70vw;
+    height: 10vh;
+    line-height: 10vh;
+}
+.color1 {
+    background-color: white;
+    /* rgb(216, 216, 216); */
+}
+.color2 {
+    background-color: white;
+    /* rgb(182, 182, 182); */
+}
+
+.transaction-date {
     display: inline-block;
-    width: 20vw;
+    width: 12%;
+    margin-right: 2%;
+}
+
+.transaction-time {
+    display: inline-block;
+    width: 7%;
+    margin-left: 2%;
+    margin-right: 2%;
 }
 
 .bitcoin-address {
     display: inline-block;
-    width: 20vw;
+    width: 35%;
+    margin-left: 2%;
+    margin-right: 2%;
 }
 
-.transaction-timestamp {
+.transaction-amount-received {
     display: inline-block;
-    width: 20vw;
+    width: 14%;
+    margin-left: 2%;
+    margin-right: 2%;
+    color: rgb(0, 83, 0);
 }
 
-.transaction-amount {
+.transaction-amount-sent {
     display: inline-block;
-    width: 20vw;
+    width: 14%;
+    margin-left: 2%;
+    color: rgb(155, 0, 0);
 }

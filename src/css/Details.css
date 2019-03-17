@@ -1,19 +1,84 @@
-.sent-received {
-    display: inline-block;
-    width: 20vw;
+.account-details {
+    display: block;
+    width: 70vw;
+    margin-left: 15vw;
+    margin-right: 15vw;
+    text-align: left;
 }
 
-.bitcoin-address {
+.account-details-left-section {
     display: inline-block;
-    width: 20vw;
 }
 
-.transaction-timestamp {
+.account-details-right-section{
     display: inline-block;
-    width: 20vw;
 }
 
-.transaction-amount {
+.account-address {
+    display: block;
+}
+
+.account-hash160 {
+    display: block;
+}
+
+.total-received {
+    display: block;
+}
+
+.total-spent {
+    display: block;
+}
+
+.current-balance {
+    display: block;
+}
+.transaction-list-heading {
+    margin-left: 15vw;
+    margin-right: 15vw;
+    width: 69vw;
+    height: 5vh;
+    display: block;
+    border: 0.5vw solid #004a7c;
+    border-radius: 1vw;
+    background-color: #004a7c;
+    color: white;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    line-height: 5vh;
+}
+
+.heading-transaction-date {
     display: inline-block;
-    width: 20vw;
+    width: 12%;
+    margin-left: 1%;
+    margin-right: 2%;
+}
+
+.heading-transaction-time {
+    display: inline-block;
+    width: 7%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.heading-bitcoin-address {
+    display: inline-block;
+    width: 35%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.heading-transaction-amount-received {
+    display: inline-block;
+    width: 14%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+
+.heading-transaction-amount-sent {
+    display: inline-block;
+    width: 14%;
+    margin-left: 2%;
+    margin-right: 1%;
 }

@@ -40,8 +40,12 @@ class Search extends Component {
       var seconds = "0" + date.getSeconds();
      
       // Display date time in MM-dd-yyyy h:m:s format
-      var convdataTime = month+'-'+day+'-'+year+' '+hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-      return convdataTime;
+      var convData = month+'-'+day+'-'+year;
+      var convTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+      return {
+        "date": convData,
+        "time": convTime
+      };
      }
     
     createTransactionLists = (address, counter) => {
@@ -55,10 +59,15 @@ class Search extends Component {
         var data = JSON.parse(request.response);
 
         if (request.status >= 200 && request.status < 400) {
-          if(this.props.allTransactionList[0]['time'] != this.convertTime(data.txs[0].time)){
-            if(this.props.allTransactionList[0]['time'] != 0){
+          var latestTransactionDate = this.convertTime(data.txs[0].time)
+          if(this.props.allTransactionList[0]['date'] != latestTransactionDate['date']
+           || this.props.allTransactionList[0]['time'] != latestTransactionDate['time']){
+            if(this.props.allTransactionList[0]['date'] != 0){
               alert("There are some new Transactions!");
             }
+            this.props.updateBitcoinAddressHash(data.hash160);
+            this.props.updateTotalReceived(data.total_received);
+            this.props.updateTotalSent(data.total_sent);
             this.props.updateBitcoinAccountBalance(data.final_balance);
             var newTransactionList = new Array();
             var receivedTransactionList = new Array();
@@ -67,9 +76,11 @@ class Search extends Component {
               for(var j=0; j<outputList.length; j++){
                 var transaction = {};
                 transaction['value'] = outputList[j].value;
-                transaction['spent'] = ( outputList[j].spent ? 'Sent' : 'Received' );
+                transaction['spent'] = outputList[j].spent;
                 transaction['addr'] = outputList[j].addr;
-                transaction['time'] = this.convertTime(data.txs[i].time);
+                var transactionDate = this.convertTime(data.txs[i].time);
+                transaction['date'] = transactionDate["date"];
+                transaction['time'] = transactionDate["time"];
                 receivedTransactionList.push(transaction);
               }
             }
@@ -90,7 +101,8 @@ class Search extends Component {
               this.props.updateNewTransactionList(newTransactionList);
               this.props.updateOldTransactionList(this.props.allTransactionList);
               this.props.updateAllTransactionList(receivedTransactionList); 
-            }       
+            }
+            console.log(this.props.allTransactionList.length);       
           }
         }
         else {
