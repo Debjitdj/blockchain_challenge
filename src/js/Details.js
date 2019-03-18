@@ -34,26 +34,37 @@ class Details extends Component {
       return (
           <div>
             {
+                this.props.isLoading &&
+                <div className="loader-container">
+                    <div className="loader"></div>
+                    <div className="loader-text"> Loading ... </div>
+                </div>
+                
+            }
+            {
                 !this.props.emptySearch &&
                 <div className="details">
                     <div className="account-details">
                         <div className="account-details-left-section">
                             <div className="account-address">
-                                Bitcoin Address: {this.props.address}
+                                <b>Bitcoin Address:</b> {this.props.address}
                             </div>
                             <div className="account-hash160">
-                                Hash 160: {this.props.addressHash}
+                                <b>Hash 160:</b> {this.props.addressHash}
+                            </div>
+                            <div className="account-details-left-section-empty-block">
+                            &nbsp;
                             </div>
                         </div>
                         <div className="account-details-right-section">
                             <div className="total-received">
-                                Total Received: {this.props.totalReceived}
+                                <b>Total Received:</b> {this.props.totalReceived}
                             </div>
                             <div className="total-spent">
-                                Total Sent: {this.props.totalSent}
+                                <b>Total Sent:</b> {this.props.totalSent}
                             </div>
                             <div className="current-balance">
-                                Current Balance: {this.props.balance}
+                                <b>Current Balance:</b> {this.props.balance}
                             </div>
                         </div>
                     </div>

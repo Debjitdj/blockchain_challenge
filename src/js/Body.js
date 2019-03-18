@@ -8,6 +8,7 @@ class Body extends Component {
     constructor(props) {
       super(props);
       this.state = {
+        enteredAddress: '',
         address: '',
         addressHash: '',
         totalReceived: 0,
@@ -19,8 +20,11 @@ class Body extends Component {
         allTransactionList: [{
           'date': 0
         }],
-        oldIntervalReference: -1
+        oldIntervalReference: -1,
+        isLoading: false
       }
+      this.updateEnteredBitcoinAddress= this.updateEnteredBitcoinAddress.bind(this);
+
       this.updateBitcoinAddress= this.updateBitcoinAddress.bind(this);
       this.updateBitcoinAddressHash=this.updateBitcoinAddressHash.bind(this);
       this.updateTotalReceived=this.updateTotalReceived.bind(this);
@@ -30,11 +34,17 @@ class Body extends Component {
       this.updateOldTransactionList=this.updateOldTransactionList.bind(this);
       this.updateNewTransactionList=this.updateNewTransactionList.bind(this);
       this.updateNewIntervalReference=this.updateNewIntervalReference.bind(this);
+
+      this.updateIsLoading=this.updateIsLoading.bind(this);
     }
     updateEmptySearch = (input) => {
       this.setState({emptySearch: input});
     }
     
+    updateEnteredBitcoinAddress = (newAddress) => {
+      this.setState({enteredAddress: newAddress});
+    }
+
 
     updateBitcoinAddress = (newAddress) => {
       this.setState({address: newAddress});
@@ -73,12 +83,16 @@ class Body extends Component {
       this.setState({oldIntervalReference: refreshId});
     }
 
+    updateIsLoading = (input) => {
+      this.setState({isLoading: input});
+    }
     render() {
       return (
         <div className="body">
           <img className="Background-image" src={bg}/>
           <div clasName="content">
             <Search
+              updateEnteredBitcoinAddress={this.updateEnteredBitcoinAddress}
               updateBitcoinAddress={this.updateBitcoinAddress}
               updateBitcoinAddressHash={this.updateBitcoinAddressHash}
               updateTotalReceived={this.updateTotalReceived}
@@ -87,6 +101,7 @@ class Body extends Component {
               updateOldTransactionList={this.updateOldTransactionList}
               updateNewTransactionList={this.updateNewTransactionList}
               updateAllTransactionList={this.updateAllTransactionList}
+              enteredAddress={this.state.enteredAddress }
               address={this.state.address}
               balance={this.state.balance}
               oldTransactionList={this.state.oldTransactionList}
@@ -95,6 +110,7 @@ class Body extends Component {
               updateEmptySearch={this.updateEmptySearch}
               oldIntervalReference={this.state.oldIntervalReference}
               updateNewIntervalReference={this.updateNewIntervalReference}
+              updateIsLoading={this.updateIsLoading}
             />
             <Details
               address={this.state.address}
@@ -105,6 +121,7 @@ class Body extends Component {
               oldTransactionList={this.state.oldTransactionList}
               newTransactionList={this.state.newTransactionList}
               emptySearch={this.state.emptySearch}
+              isLoading={this.state.isLoading}
             />
           </div>
         </div>

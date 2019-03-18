@@ -5,14 +5,8 @@
     width: 70vw;
     height: 10vh;
     line-height: 10vh;
-}
-.color1 {
-    background-color: white;
-    /* rgb(216, 216, 216); */
-}
-.color2 {
-    background-color: white;
-    /* rgb(182, 182, 182); */
+    color: #5f5f5f;
+    background-color: white
 }
 
 .transaction-date {

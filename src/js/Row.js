@@ -7,9 +7,8 @@ class Row extends Component {
     }
 
     render() {
-        var rowClass = ((this.props.id%2===0) ? "row color1" : "row color2")
       return (
-        <div className={rowClass}>
+        <div className="row">
             <div className="transaction-date">
                 {this.props.transaction["date"]}
                 {(this.props.isNew ? '(NEW)' : '')}

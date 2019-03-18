@@ -1,18 +1,67 @@
+.loader-container {
+    width: 25vw;
+    margin-left: 37.5vw;
+    margin-right: 37.5vw;
+    margin-top: 20vh;
+    text-align: left;
+}
+.loader {
+    display: inline-block;
+    /* margin-left: 44vw; */
+    /* margin-right: 44vw; */
+    border: 1vw solid white;
+    border-radius: 90%;
+    border-top: 1vw solid rgb(21, 35, 67);
+    border-bottom: 1vw solid rgb(21, 35, 67);
+    width: 4vw;
+    height: 4vw;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+  }
+
+  .loader-text {
+      display: inline-block;
+      height: 6vw;
+      position: absolute;
+      line-height: 6vw;
+      margin-left: 1vw;
+      font-size: 7vh;
+  }
+  
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
 .account-details {
     display: block;
     width: 70vw;
     margin-left: 15vw;
     margin-right: 15vw;
+    color: #5f5f5f;
 }
 
 .account-details-left-section {
     display: inline-block;
     text-align: left;
+    width: 34vw;
+    margin-left: 2vw;
+    margin-right: 2vw;
+    padding-left:2vw;
 }
 
 .account-details-right-section{
     display: inline-block;
     text-align: right;
+    width: 24vw;
+    margin-left: 2vw;
+    margin-right: 2vw;
+    padding-right:2vw;
 }
 
 .account-address {
@@ -23,16 +72,35 @@
     display: block;
 }
 
+.account-details-left-section-empty-block {
+    display: block;
+}
+
 .total-received {
     display: block;
+    color: green;
+}
+
+.total-received > b {
+    color: #5f5f5f;
 }
 
 .total-spent {
     display: block;
+    color: rgb(201, 0, 0);
+}
+
+.total-spent > b {
+    color: #5f5f5f;
 }
 
 .current-balance {
     display: block;
+    color: blue;
+}
+
+.current-balance > b {
+    color: #5f5f5f;
 }
 .transaction-list-heading {
     margin-left: 15vw;

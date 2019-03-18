@@ -10,7 +10,7 @@ class Search extends Component {
     handleBitcoinAddressChange = () => (event) => {
       const newValue = String(event.target.value);
       if (newValue !== null) {
-          this.props.updateBitcoinAddress(newValue);
+          this.props.updateEnteredBitcoinAddress(newValue);
       }
     };
 
@@ -54,6 +54,15 @@ class Search extends Component {
 
       request.open('GET', 'https://blockchain.info/rawaddr/'+address+'?cors=true', true);
 
+      request.onreadystatechange = () => {
+        if (request.readyState == 4 && request.status == 200) {
+          var timeOutId = setTimeout(() => {
+            this.props.updateIsLoading(false);
+            this.props.updateEmptySearch(false);
+          },3000)
+        }
+      }
+
       request.onload = () => {
 
         var data = JSON.parse(request.response);
@@ -62,9 +71,10 @@ class Search extends Component {
           var latestTransactionDate = this.convertTime(data.txs[0].time)
           if(this.props.allTransactionList[0]['date'] != latestTransactionDate['date']
            || this.props.allTransactionList[0]['time'] != latestTransactionDate['time']){
-            if(this.props.allTransactionList[0]['date'] != 0){
-              alert("There are some new Transactions!");
-            }
+            // if(this.props.allTransactionList[0]['date'] != 0){
+            //   alert("There are some new Transactions!");
+            // }
+            this.props.updateBitcoinAddress(data.address);
             this.props.updateBitcoinAddressHash(data.hash160);
             this.props.updateTotalReceived(data.total_received);
             this.props.updateTotalSent(data.total_sent);
@@ -117,7 +127,8 @@ class Search extends Component {
       if(this.props.oldIntervalReference != -1){
         clearInterval(this.props.oldIntervalReference);
       }
-      this.props.updateEmptySearch(false);
+      this.props.updateEmptySearch(true);
+      this.props.updateIsLoading(true);
       var counter = 1;
       this.createTransactionLists(address,counter);
       var refreshId = setInterval(() => {
@@ -131,7 +142,7 @@ class Search extends Component {
       return (
         <div className="search">
             <input type="text" className="searchTerm" placeholder="Enter the Bitcoin Address here" onChange={this.handleBitcoinAddressChange()}/>
-            <button type="submit" className="searchButton" onClick={() => this.getTransactions(this.props.address)}>
+            <button type="submit" className="searchButton" onClick={() => this.getTransactions(this.props.enteredAddress)}>
                 <img src={search_logo} alt="submit" />
             </button>
         </div>
