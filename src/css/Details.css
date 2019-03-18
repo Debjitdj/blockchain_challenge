@@ -3,15 +3,16 @@
     width: 70vw;
     margin-left: 15vw;
     margin-right: 15vw;
-    text-align: left;
 }
 
 .account-details-left-section {
     display: inline-block;
+    text-align: left;
 }
 
 .account-details-right-section{
     display: inline-block;
+    text-align: right;
 }
 
 .account-address {

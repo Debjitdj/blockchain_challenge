@@ -21,16 +21,20 @@ class Row extends Component {
                 {this.props.transaction["addr"]}
             </div>
             <div className="transaction-amount-received">
+                <b>
                 {
                     !this.props.transaction["spent"] &&
                     this.props.transaction["value"]
                 }
+                </b>
             </div>
             <div className="transaction-amount-sent">
+                <b>
                 {
                     this.props.transaction["spent"] &&
                     this.props.transaction["value"]
                 }
+                </b>
             </div>
         </div>
       );

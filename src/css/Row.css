@@ -40,12 +40,12 @@
     width: 14%;
     margin-left: 2%;
     margin-right: 2%;
-    color: rgb(0, 83, 0);
+    color: green;
 }
 
 .transaction-amount-sent {
     display: inline-block;
     width: 14%;
     margin-left: 2%;
-    color: rgb(155, 0, 0);
+    color: rgb(201, 0, 0);
 }
