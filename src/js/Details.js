@@ -1,20 +1,34 @@
 import React, { Component } from 'react';
 import '../css/Details.css';
 import Row from './Row.js';
+import Transaction from './Transaction.js';
 
 class Details extends Component {
     constructor(props) {
       super(props);
     }
 
+    toggleTransactionVisibility = (index, isNew) => {
+        this.props.toggleTransactionVisibility(index, isNew);
+    }
+
     renderRow = (transaction, index, isNew) => {
         return (
-            <Row
-                transaction={transaction}
-                key={index}
-                id={index}
-                isNew={isNew}
-            />
+            <div className="row-container">
+                <Row
+                    transaction={transaction}
+                    key={"row-class-"+String(isNew)+"-"+index}
+                    id={index}
+                    isNew={isNew}
+                    toggleTransactionVisibility={this.toggleTransactionVisibility}
+                />
+                <Transaction
+                    transaction={transaction}
+                    key={"transaction-class-"+String(isNew)+"-"+index}
+                    id={index}
+                    isNew={isNew}
+                />
+            </div>
         )
     }
 
@@ -32,7 +46,7 @@ class Details extends Component {
 
     render() {
       return (
-          <div>
+          <div className="details-container">
             {
                 this.props.isLoading &&
                 <div className="loader-container">
@@ -75,14 +89,14 @@ class Details extends Component {
                         <div className="heading-transaction-time">
                             <b>Time</b>
                         </div>
-                        <div className="heading-bitcoin-address">
-                            <b>Address</b>
+                        <div className="heading-bitcoin-transaction-hash">
+                            <b>Transaction Hash</b>
                         </div>
                         <div className="heading-transaction-amount-received">
-                            <b>BitCoin Received</b>
+                            <b>BitCoin</b> <br/> <b>Received</b>
                         </div>
                         <div className="heading-transaction-amount-sent">
-                            <b>BitCoin Sent</b>
+                            <b>BitCoin</b> <br/> <b>Sent</b>
                         </div>
                     </div>
                     {this.getTransactionRows()}

@@ -4,6 +4,7 @@
     margin-right: 37.5vw;
     margin-top: 20vh;
     text-align: left;
+    /* z-index: 2; */
 }
 .loader {
     display: inline-block;
@@ -18,26 +19,26 @@
     height: 4vw;
     -webkit-animation: spin 2s linear infinite;
     animation: spin 2s linear infinite;
-  }
+}
 
-  .loader-text {
-      display: inline-block;
-      height: 6vw;
-      position: absolute;
-      line-height: 6vw;
-      margin-left: 1vw;
-      font-size: 7vh;
-  }
-  
-  @-webkit-keyframes spin {
+.loader-text {
+    display: inline-block;
+    height: 6vw;
+    position: absolute;
+    line-height: 6vw;
+    margin-left: 1vw;
+    font-size: 7vh;
+}
+
+@-webkit-keyframes spin {
     0% { -webkit-transform: rotate(0deg); }
     100% { -webkit-transform: rotate(360deg); }
-  }
-  
-  @keyframes spin {
+}
+
+@keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-  }
+}
 
 .account-details {
     display: block;
@@ -104,51 +105,57 @@
     color: #5f5f5f;
 }
 .transaction-list-heading {
-    margin-left: 15vw;
-    margin-right: 15vw;
-    width: 69vw;
-    height: 5vh;
-    display: block;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    width: 79vw;
+    height: 8vh;
+    display: flex;
     border: 0.5vw solid #004a7c;
     border-radius: 1vw;
     background-color: #004a7c;
     color: white;
     margin-top: 2vh;
     margin-bottom: 2vh;
-    line-height: 5vh;
+    line-height: 8vh;
 }
 
 .heading-transaction-date {
     display: inline-block;
     width: 12%;
     margin-left: 1%;
-    margin-right: 2%;
+    margin-right: 1%;
 }
 
 .heading-transaction-time {
     display: inline-block;
     width: 7%;
-    margin-left: 2%;
-    margin-right: 2%;
+    margin-left: 1%;
+    margin-right: 1%;
 }
 
-.heading-bitcoin-address {
+.heading-bitcoin-transaction-hash {
     display: inline-block;
-    width: 35%;
-    margin-left: 2%;
-    margin-right: 2%;
+    width: 51%;
+    margin-left: 1%;
+    margin-right: 1%;
 }
 
 .heading-transaction-amount-received {
     display: inline-block;
-    width: 14%;
-    margin-left: 2%;
-    margin-right: 2%;
+    width: 10%;
+    margin-left: 1%;
+    margin-right: 1%;
+    line-height: 4vh;
 }
 
 .heading-transaction-amount-sent {
     display: inline-block;
-    width: 14%;
-    margin-left: 2%;
+    width: 10%;
+    margin-left: 1%;
     margin-right: 1%;
+    line-height: 4vh;
 }
+
+/* .row-container :hover {
+    background-color: rgb(245, 245, 245)
+} */

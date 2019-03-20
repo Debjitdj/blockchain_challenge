@@ -35,6 +35,8 @@ class Body extends Component {
       this.updateNewTransactionList=this.updateNewTransactionList.bind(this);
       this.updateNewIntervalReference=this.updateNewIntervalReference.bind(this);
 
+      this.toggleTransactionVisibility=this.toggleTransactionVisibility.bind(this);
+
       this.updateIsLoading=this.updateIsLoading.bind(this);
     }
     updateEmptySearch = (input) => {
@@ -86,10 +88,42 @@ class Body extends Component {
     updateIsLoading = (input) => {
       this.setState({isLoading: input});
     }
+
+    toggleTransactionVisibility = (index, isNew) => {
+      if (isNew) {
+        var temp = !this.state.newTransactionList[index].visible;
+        var tempNewTransactionList = this.state.newTransactionList;
+        tempNewTransactionList[index].visible = temp;
+
+        var tempAllTransactionList = this.state.allTransactionList;
+        tempAllTransactionList[index].visible = temp;
+        this.setState({
+          newTransactionList: tempNewTransactionList,
+          allTransactionList: tempAllTransactionList
+        })
+      }
+      else {
+        var temp = !this.state.oldTransactionList[index].visible;
+        var tempIndex = index + this.state.newTransactionList.length;
+
+        var tempOldTransactionList = this.state.oldTransactionList;
+        tempOldTransactionList[index].visible = temp;
+
+        var tempAllTransactionList = this.state.allTransactionList;
+        tempAllTransactionList[tempIndex].visible = temp;
+        this.setState({
+          oldTransactionList: tempOldTransactionList,
+          allTransactionList: tempAllTransactionList
+        })
+      }
+
+      
+      
+    }
     render() {
       return (
         <div className="body">
-          <img className="Background-image" src={bg}/>
+          {/* <img className="Background-image" src={bg}/> */}
           <div className="content">
             <Search
               updateEnteredBitcoinAddress={this.updateEnteredBitcoinAddress}
@@ -112,7 +146,12 @@ class Body extends Component {
               updateNewIntervalReference={this.updateNewIntervalReference}
               updateIsLoading={this.updateIsLoading}
             />
-            <Details
+            {
+              this.state.emptySearch && !this.state.isLoading &&
+              <iframe src="https://giphy.com/embed/GMIbzgzyS4pws" width="480" height="266" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+
+            }
+              <Details
               address={this.state.address}
               addressHash={this.state.addressHash}
               totalReceived={this.state.totalReceived}
@@ -122,6 +161,7 @@ class Body extends Component {
               newTransactionList={this.state.newTransactionList}
               emptySearch={this.state.emptySearch}
               isLoading={this.state.isLoading}
+              toggleTransactionVisibility={this.toggleTransactionVisibility}
             />
           </div>
         </div>

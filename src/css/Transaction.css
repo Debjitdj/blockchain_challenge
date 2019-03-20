@@ -1,0 +1,50 @@
+.transaction-details-container {
+    margin-left: 10vw;
+    margin-right: 10vw;
+    margin-bottom: 2vh;
+    width: 80vw;
+    display: block;
+    overflow: auto;
+    background-color: rgb(204, 204, 204);
+}
+
+.transaction-details {      
+    display: flex;
+    border: 0.25vw solid rgb(190, 190, 190);
+    border-top-width: 0;
+}
+
+.senders {
+    display: inline-block;
+    width: 40%;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    color: rgb(38, 53, 117);
+}
+
+.arrow {
+    display: inline-block;
+    width: 10%;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+.receivers {
+    display: inline-block;
+    width: 40%;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+}
+
+.address-list-heading {
+    color: #5f5f5f
+}
+
+.address {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}

@@ -15,31 +15,14 @@ class Search extends Component {
     };
 
     convertTime = (unixtimestamp) => {
-      // Months array
       var months_arr = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-     
-      // Convert timestamp to milliseconds
       var date = new Date(unixtimestamp*1000);
-     
-      // Year
       var year = date.getFullYear();
-     
-      // Month
       var month = months_arr[date.getMonth()];
-     
-      // Day
       var day = date.getDate();
-     
-      // Hours
       var hours = date.getHours();
-     
-      // Minutes
       var minutes = "0" + date.getMinutes();
-     
-      // Seconds
       var seconds = "0" + date.getSeconds();
-     
-      // Display date time in MM-dd-yyyy h:m:s format
       var convData = month+'-'+day+'-'+year;
       var convTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
       return {
@@ -124,6 +107,7 @@ class Search extends Component {
               transaction['date'] = transactionDate["date"];
               transaction['time'] = transactionDate["time"];
               transaction['hash'] = data.txs[i].hash;
+              transaction['visible'] = false;
 
               if( f === 1 && g === 1) {
                 transaction['value'] = sentValue - receivedValue;
@@ -180,7 +164,7 @@ class Search extends Component {
         counter++;
         this.props.updateNewIntervalReference(refreshId);
         this.createTransactionLists(address,counter);
-      }, 10000);
+      }, 1000);
     }
 
     render() {
