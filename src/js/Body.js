@@ -18,7 +18,7 @@ class Body extends Component {
         oldTransactionList: [],
         newTransactionList: [],
         allTransactionList: [{
-          'date': 0
+          'hash': ''
         }],
         oldIntervalReference: -1,
         isLoading: false
@@ -90,7 +90,7 @@ class Body extends Component {
       return (
         <div className="body">
           <img className="Background-image" src={bg}/>
-          <div clasName="content">
+          <div className="content">
             <Search
               updateEnteredBitcoinAddress={this.updateEnteredBitcoinAddress}
               updateBitcoinAddress={this.updateBitcoinAddress}
