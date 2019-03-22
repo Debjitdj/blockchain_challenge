@@ -185,8 +185,10 @@ class Search extends Component {
       this.props.updateWrongAddress(false);
       this.props.updateNewSearchAddress(enteredAddress);
       var counter = 1;
+      setTimeout(() => {
+        this.createTransactionLists(enteredAddress,0,counter);
+      },5000);
       this.props.updateOffSet(0);
-      this.createTransactionLists(enteredAddress,0,counter);
     }
 
     getPreviousTransactions = (savedAddress) => {
@@ -194,7 +196,9 @@ class Search extends Component {
         this.props.updateEmptySearch(true);
         this.props.updateIsLoading(true);
         var counter = 1;
-        this.createTransactionLists(savedAddress,this.props.offSet-50,counter);
+        setTimeout(() => {
+          this.createTransactionLists(savedAddress,this.props.offSet-50,counter);
+        },5000);
         this.props.updateOffSet(this.props.offSet-50);
       }
     }
@@ -204,7 +208,9 @@ class Search extends Component {
         this.props.updateEmptySearch(true);
         this.props.updateIsLoading(true);
         var counter = 1;
-        this.createTransactionLists(savedAddress,this.props.offSet+50,counter);
+        setTimeout(() => {
+          this.createTransactionLists(savedAddress,this.props.offSet+50,counter);
+        },5000);
         this.props.updateOffSet(this.props.offSet+50);
       }
     }
