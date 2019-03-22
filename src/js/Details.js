@@ -4,9 +4,6 @@ import Row from './Row.js';
 import Transaction from './Transaction.js';
 
 class Details extends Component {
-    constructor(props) {
-      super(props);
-    }
 
     toggleTransactionVisibility = (index, isNew) => {
         this.props.toggleTransactionVisibility(index, isNew);

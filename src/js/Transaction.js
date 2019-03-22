@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import '../css/Transaction.css';
 
 class Transaction extends Component {
-    constructor(props) {
-      super(props);
-    }
-
+    
     renderAddress = (address, status) => {
         var addressClass = (address === this.props.address ? "address" : "address blue");
         return (

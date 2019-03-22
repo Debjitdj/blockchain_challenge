@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import '../css/Search.css';
 import search_logo from '../media/search.svg'
-import { resolve } from 'path';
 
 class Search extends Component {
-    constructor(props) {
-      super(props);
-    }
 
     handleBitcoinAddressChange = () => (event) => {
       const newValue = String(event.target.value);
@@ -33,7 +29,6 @@ class Search extends Component {
      }
     
     createTransactionLists = (enteredAddress, offSet, counter) => {
-        console.log(counter);
         var request = new XMLHttpRequest();
 
         var currentTime = Math.round(+new Date()/1000);
@@ -53,7 +48,7 @@ class Search extends Component {
                 this.props.updateIsLoading(false);
                 this.props.updateEmptySearch(false);
               },3000)
-              if(!this.props.isWrongAddress && this.props.newSearchAddress === enteredAddress){
+              if(!this.props.isWrongAddress && this.props.newSearchAddress === enteredAddress && this.props.offSet === offSet){
                 setTimeout(() => {
                   counter++;
                   if (this.props.newSearchAddress === enteredAddress && this.props.offSet === offSet){
@@ -160,8 +155,6 @@ class Search extends Component {
                   // });
                   var newTransactionList = [];
                   for(j=0; j<receivedTransactionList.length; j++){
-                    // console.log(receivedTransactionList[j]);
-                    // console.log(this.props.allTransactionList[0]);
                     if(receivedTransactionList[j].hash !== this.props.allTransactionList[0].hash){
                       newTransactionList.push(receivedTransactionList[j]);
                     }
@@ -172,7 +165,6 @@ class Search extends Component {
                   this.props.updateNewTransactionList(newTransactionList);
                   this.props.updateOldTransactionList(this.props.allTransactionList);
                   this.props.updateAllTransactionList(receivedTransactionList); 
-                  // console.log(newTransactionList);
                 }      
               }
             }
@@ -193,6 +185,7 @@ class Search extends Component {
       this.props.updateWrongAddress(false);
       this.props.updateNewSearchAddress(enteredAddress);
       var counter = 1;
+      this.props.updateOffSet(0);
       this.createTransactionLists(enteredAddress,0,counter);
     }
 
@@ -216,6 +209,12 @@ class Search extends Component {
       }
     }
 
+    checkForEnter = (e, enteredAddress) => {
+      if(e.key === 'Enter'){
+        this.getTransactions(enteredAddress);
+      }
+    }
+
     render() {
       var prevButtonClass = (this.props.offSet>=50 ? "prev-50-button" : "prev-50-button disabled");
       var nextButtonClass = (this.props.offSet+50<this.props.n_tx ? "next-50-button" : "next-50-button disabled");
@@ -227,7 +226,7 @@ class Search extends Component {
                     <button onClick={() => this.getPreviousTransactions(this.props.address)}></button>
                 </div>
             }
-            <input type="text" className="searchTerm" placeholder="Enter the Bitcoin Address here" onChange={this.handleBitcoinAddressChange()}/>
+            <input type="text" className="searchTerm" placeholder="Enter the Bitcoin Address here" onChange={this.handleBitcoinAddressChange()} onKeyPress={(e) => this.checkForEnter(e, this.props.enteredAddress)}/>
             <button type="submit" className="searchButton" onClick={() => this.getTransactions(this.props.enteredAddress)}>
                 <img src={search_logo} alt="submit" />
             </button>

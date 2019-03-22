@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import '../css/Row.css';
 
 class Row extends Component {
-    constructor(props) {
-      super(props);
-    }
 
     render() {
         var newRowClass = (this.props.isNew ? 'row new-row' : 'row')
