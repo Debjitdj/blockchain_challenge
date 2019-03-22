@@ -32,7 +32,7 @@ class Search extends Component {
       };
      }
     
-    createTransactionLists = (enteredAddress, counter) => {
+    createTransactionLists = (enteredAddress, offSet, counter) => {
         console.log(counter);
         var request = new XMLHttpRequest();
 
@@ -45,7 +45,7 @@ class Search extends Component {
         }
         setTimeout(() => {
           this.props.updateLastAPICall(Math.round(+new Date()/1000));
-          request.open('GET', 'https://blockchain.info/rawaddr/'+enteredAddress+'?cors=true', true);
+          request.open('GET', 'https://blockchain.info/rawaddr/'+enteredAddress+'?cors=true'+"&offset="+offSet, true);
         
           request.onreadystatechange = () => {
             if (request.readyState === 4 && request.status === 200) {
@@ -56,8 +56,8 @@ class Search extends Component {
               if(!this.props.isWrongAddress && this.props.newSearchAddress === enteredAddress){
                 setTimeout(() => {
                   counter++;
-                  if (this.props.newSearchAddress === enteredAddress){
-                    this.createTransactionLists(enteredAddress,counter);
+                  if (this.props.newSearchAddress === enteredAddress && this.props.offSet === offSet){
+                    this.createTransactionLists(enteredAddress,offSet,counter);
                   }
                 }, 10000);
               }
@@ -75,6 +75,7 @@ class Search extends Component {
                 this.props.updateTotalReceived(data.total_received);
                 this.props.updateTotalSent(data.total_sent);
                 this.props.updateBitcoinAccountBalance(data.final_balance);
+                this.props.update_n_tx(data.n_tx);
                 var newTransactionList = [];
                 var receivedTransactionList = [];
                 for (var i=0; i<data.txs.length; i++){
@@ -177,16 +178,50 @@ class Search extends Component {
       this.props.updateWrongAddress(false);
       this.props.updateNewSearchAddress(enteredAddress);
       var counter = 1;
-      this.createTransactionLists(enteredAddress,counter);
+      this.createTransactionLists(enteredAddress,0,counter);
+    }
+
+    getPreviousTransactions = (savedAddress) => {
+      if(this.props.offSet>=50){
+        this.props.updateEmptySearch(true);
+        this.props.updateIsLoading(true);
+        var counter = 1;
+        this.createTransactionLists(savedAddress,this.props.offSet-50,counter);
+        this.props.updateOffSet(this.props.offSet-50);
+      }
+    }
+
+    getNextTransactions = (savedAddress) => {
+      if(this.props.offSet+50<this.props.n_tx){
+        this.props.updateEmptySearch(true);
+        this.props.updateIsLoading(true);
+        var counter = 1;
+        this.createTransactionLists(savedAddress,this.props.offSet+50,counter);
+        this.props.updateOffSet(this.props.offSet+50);
+      }
     }
 
     render() {
+      var prevButtonClass = (this.props.offSet>=50 ? "prev-50-button" : "prev-50-button disabled");
+      var nextButtonClass = (this.props.offSet+50<this.props.n_tx ? "next-50-button" : "next-50-button disabled");
       return (
         <div className="search">
+            {
+                !this.props.emptySearch && !this.props.isWrongAddress &&
+                <div className={prevButtonClass}>
+                    <button onClick={() => this.getPreviousTransactions(this.props.address)}></button>
+                </div>
+            }
             <input type="text" className="searchTerm" placeholder="Enter the Bitcoin Address here" onChange={this.handleBitcoinAddressChange()}/>
             <button type="submit" className="searchButton" onClick={() => this.getTransactions(this.props.enteredAddress)}>
                 <img src={search_logo} alt="submit" />
             </button>
+            {
+                !this.props.emptySearch && !this.props.isWrongAddress &&
+                <div className={nextButtonClass}>
+                    <button onClick={() => this.getNextTransactions(this.props.address)}></button>
+                </div>
+            }
         </div>
       );
     }
