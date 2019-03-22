@@ -1,18 +1,18 @@
 # Blockchain Challenge
 
-This project was offered by Blockchain as a Front-end Engineer Code Challenge for Summer Interns 2019. This is a simple web application using React and the Blockchain API that loads and displays the balance and transactions for a bitcoin address someone searches, and updates on incoming transactions.
+This project was offered by Blockchain as a Front-end Engineer Code Challenge for Summer Interns 2019. This is a simple web application using React and the Blockchain API that loads and displays the balance and transactions for a bitcoin address someone searches, and updates itself when new transactions are made.
 
 ## Getting Started
 
-Go to some folder where you want to clone this project locally and open terminal in that folder. (You will get an option if you right click inside the folder)
-Clone this project on your local mechine using this command:
+Go to a folder where you want to clone this project locally and open the terminal in that folder (You will get an option if you right click inside the folder).
+Clone this project on your local machine using this command:
 ```
 git clone https://github.com/Debjitdj/blockchain_challenge.git
 ```
 
 ### Prerequisites
 
-(If you already have Node.js and npm installed, you forward to 'Installing')
+(If you already have Node.js and npm installed, you skip to 'Installing')
 
 Install [Node.js](https://nodejs.org/en/download/)
 Install [npm](https://www.npmjs.com/get-npm)
