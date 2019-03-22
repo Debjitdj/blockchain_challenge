@@ -72,9 +72,9 @@ class Search extends Component {
                 this.props.updateIsLoading(true);
                 this.props.updateBitcoinAddress(data.address);
                 this.props.updateBitcoinAddressHash(data.hash160);
-                this.props.updateTotalReceived(data.total_received);
-                this.props.updateTotalSent(data.total_sent);
-                this.props.updateBitcoinAccountBalance(data.final_balance);
+                this.props.updateTotalReceived(data.total_received/100000000);
+                this.props.updateTotalSent(data.total_sent/100000000);
+                this.props.updateBitcoinAccountBalance(data.final_balance/100000000);
                 this.props.update_n_tx(data.n_tx);
                 var receivedTransactionList = [];
                 for (var i=0; i<data.txs.length; i++){
@@ -127,15 +127,15 @@ class Search extends Component {
                   transaction['visible'] = false;
     
                   if( f === 1 && g === 1) {
-                    transaction['value'] = sentValue - receivedValue;
+                    transaction['value'] = (sentValue - receivedValue)/100000000;
                     transaction['spent'] = true;
                   }
                   else if ( f === 1) {
-                    transaction['value'] = sentValue;
+                    transaction['value'] = sentValue/100000000;
                     transaction['spent'] = true;
                   }
                   else {
-                    transaction['value'] = receivedValue;
+                    transaction['value'] = receivedValue/100000000;
                     transaction['spent'] = false;
                   }
                   receivedTransactionList.push(transaction);
