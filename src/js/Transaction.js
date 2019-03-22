@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import '../css/Transaction.css';
+import arrow from '../media/arrow1.svg'
 
 class Transaction extends Component {
-    
+
     renderAddress = (address, status) => {
         var addressClass = (address === this.props.address ? "address" : "address blue");
         return (
@@ -38,7 +39,7 @@ class Transaction extends Component {
             <div className="transaction-details">
                 {this.getSenders()}
                 <div className="arrow">
-                    ====>
+                    <img src={arrow}/>
                 </div>
                 {this.getReceivers()}
             </div>

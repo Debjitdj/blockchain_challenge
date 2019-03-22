@@ -14,8 +14,8 @@ git clone https://github.com/Debjitdj/blockchain_challenge.git
 
 (If you already have Node.js and npm installed, you skip to 'Installing')
 
-Install [Node.js](https://nodejs.org/en/download/)
-Install [npm](https://www.npmjs.com/get-npm)
+* Install [Node.js](https://nodejs.org/en/download/)
+* Install [npm](https://www.npmjs.com/get-npm)
 
 ### Installing React
 
@@ -49,6 +49,8 @@ Here are some randomly selected addresses, for testing purposes:
 
 * 1EzwoHtiXB4iFwedPr49iywjZn2nnekhoj
 * 1dice8EMZmqKvrGE4Qc9bUFf9PX3xaYDp
+
+You can see more details about the transactions if you click on them.
 
 ## Authors
 

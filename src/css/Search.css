@@ -43,6 +43,11 @@
   content: '<< Previous 50';
 }
 
+.prev-50-button > button:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
 .next-50-button {
   position: fixed;
   top: 42%;
@@ -71,9 +76,17 @@
   content: 'Next 50 >>';
 }
 
-.disabled {
+.next-50-button > button:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.disabled > button {
+  opacity: 0.5;
+}
+
+.disabled > button:hover {
   cursor: not-allowed;
-  pointer-events: none;
   opacity: 0.5;
 }
 
@@ -104,7 +117,9 @@
     color: #fff;
     border-radius: 2vh;
     cursor: pointer;
+    font-size: 1vh;
   }
+
 
   .searchButton > img {
     width: 5vh;
