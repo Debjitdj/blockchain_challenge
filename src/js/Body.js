@@ -20,8 +20,10 @@ class Body extends Component {
         allTransactionList: [{
           'hash': ''
         }],
-        oldIntervalReference: -1,
-        isLoading: false
+        isLoading: false,
+        lastAPICall: Math.round(+new Date()/1000),
+        isWrongAddress: false,
+        newSearchAddress:''
       }
       this.updateEnteredBitcoinAddress= this.updateEnteredBitcoinAddress.bind(this);
 
@@ -33,11 +35,15 @@ class Body extends Component {
 
       this.updateOldTransactionList=this.updateOldTransactionList.bind(this);
       this.updateNewTransactionList=this.updateNewTransactionList.bind(this);
-      this.updateNewIntervalReference=this.updateNewIntervalReference.bind(this);
 
       this.toggleTransactionVisibility=this.toggleTransactionVisibility.bind(this);
 
       this.updateIsLoading=this.updateIsLoading.bind(this);
+
+      this.updateLastAPICall=this.updateLastAPICall.bind(this);
+
+      this.updateWrongAddress=this.updateWrongAddress.bind(this);
+      this.updateNewSearchAddress=this.updateNewSearchAddress.bind(this);
     }
     updateEmptySearch = (input) => {
       this.setState({emptySearch: input});
@@ -81,12 +87,20 @@ class Body extends Component {
       this.setState({allTransactionList: list});
     }
 
-    updateNewIntervalReference = (refreshId) => {
-      this.setState({oldIntervalReference: refreshId});
-    }
-
     updateIsLoading = (input) => {
       this.setState({isLoading: input});
+    }
+
+    updateLastAPICall = (newTime) => {
+      this.setState({lastAPICall: newTime});
+    }
+
+    updateWrongAddress = (input) => {
+      this.setState({isWrongAddress: input});
+    }
+
+    updateNewSearchAddress = (newAddress) => {
+      this.setState({newSearchAddress: newAddress});
     }
 
     toggleTransactionVisibility = (index, isNew) => {
@@ -143,13 +157,21 @@ class Body extends Component {
               allTransactionList={this.state.allTransactionList}
               updateEmptySearch={this.updateEmptySearch}
               oldIntervalReference={this.state.oldIntervalReference}
-              updateNewIntervalReference={this.updateNewIntervalReference}
               updateIsLoading={this.updateIsLoading}
+              lastAPICall={this.state.lastAPICall}
+              updateLastAPICall={this.updateLastAPICall}
+              updateWrongAddress={this.updateWrongAddress}
+              isWrongAddress={this.state.isWrongAddress}
+              updateNewSearchAddress={this.updateNewSearchAddress}
+              newSearchAddress={this.state.newSearchAddress}
             />
             {
               this.state.emptySearch && !this.state.isLoading &&
-              <iframe src="https://giphy.com/embed/GMIbzgzyS4pws" width="480" height="266" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-
+              <div className="home-body">
+                <div className="welcome-message">Please limit your queries to a maximum of 1 every 10 seconds, because of API call limitations.</div>
+                <iframe src="https://giphy.com/embed/GMIbzgzyS4pws" width="480" height="266" frameBorder="0" className="giphy-embed" allowFullScreen></iframe>
+              </div>
+              
             }
               <Details
               address={this.state.address}
@@ -162,6 +184,7 @@ class Body extends Component {
               emptySearch={this.state.emptySearch}
               isLoading={this.state.isLoading}
               toggleTransactionVisibility={this.toggleTransactionVisibility}
+              isWrongAddress={this.state.isWrongAddress}
             />
           </div>
         </div>

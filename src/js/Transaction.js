@@ -6,8 +6,15 @@ class Transaction extends Component {
       super(props);
     }
 
+    renderAddress = (address, status) => {
+        var addressClass = (address === this.props.address ? "address" : "address blue");
+        return (
+            <div className={addressClass} key={status+"-"+address}>{address}</div>
+        )
+    }
+
     getSenders = () => {
-        var senders = this.props.transaction.inputs.map((address) => <div className="address">{address}</div>)
+        var senders = this.props.transaction.inputs.map((address) => this.renderAddress(address,"sender"));
         return(
             <div className="senders">
                 <div className="address-list-heading"><b><u>Sender(s)</u></b></div>
@@ -17,7 +24,7 @@ class Transaction extends Component {
     }
 
     getReceivers = () => {
-        var receivers = this.props.transaction.out.map((address) => <div className="address">{address}</div>)
+        var receivers = this.props.transaction.out.map((address) => this.renderAddress(address, "receiver"))
         return(
             <div className="receivers">
                 <div className="address-list-heading"><b><u>Receiver(s)</u></b></div>

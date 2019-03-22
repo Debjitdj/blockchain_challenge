@@ -14,7 +14,7 @@ class Details extends Component {
 
     renderRow = (transaction, index, isNew) => {
         return (
-            <div className="row-container">
+            <div className="row-container" key={index}>
                 <Row
                     transaction={transaction}
                     key={"row-class-"+String(isNew)+"-"+index}
@@ -27,6 +27,7 @@ class Details extends Component {
                     key={"transaction-class-"+String(isNew)+"-"+index}
                     id={index}
                     isNew={isNew}
+                    address={this.props.address}
                 />
             </div>
         )
@@ -48,7 +49,13 @@ class Details extends Component {
       return (
           <div className="details-container">
             {
-                this.props.isLoading &&
+                this.props.isWrongAddress &&
+                <div className="wrong-address">
+                    Oops! This Bitcoin Address doesn't exist. Please verify Address.
+                </div>
+            }
+            {
+                this.props.isLoading && !this.props.isWrongAddress &&
                 <div className="loader-container">
                     <div className="loader"></div>
                     <div className="loader-text"> Loading ... </div>
@@ -56,7 +63,7 @@ class Details extends Component {
                 
             }
             {
-                !this.props.emptySearch &&
+                !this.props.emptySearch && !this.props.isWrongAddress &&
                 <div className="details">
                     <div className="account-details">
                         <div className="account-details-left-section">
