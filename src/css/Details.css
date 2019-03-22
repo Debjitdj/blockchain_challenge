@@ -4,12 +4,9 @@
     margin-right: 37.5vw;
     margin-top: 20vh;
     text-align: left;
-    /* z-index: 2; */
 }
 .loader {
     display: inline-block;
-    /* margin-left: 44vw; */
-    /* margin-right: 44vw; */
     border: 1vw solid white;
     border-radius: 90%;
     border-top: 1vw solid rgb(21, 35, 67);
@@ -74,7 +71,7 @@
     display: block;
 }
 
-.account-details-left-section-empty-block {
+.account-n_tx {
     display: block;
 }
 
@@ -155,7 +152,3 @@
     margin-right: 1%;
     line-height: 4vh;
 }
-
-/* .row-container :hover {
-    background-color: rgb(245, 245, 245)
-} */

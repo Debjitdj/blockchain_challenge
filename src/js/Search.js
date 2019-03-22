@@ -76,7 +76,6 @@ class Search extends Component {
                 this.props.updateTotalSent(data.total_sent);
                 this.props.updateBitcoinAccountBalance(data.final_balance);
                 this.props.update_n_tx(data.n_tx);
-                var newTransactionList = [];
                 var receivedTransactionList = [];
                 for (var i=0; i<data.txs.length; i++){
     
@@ -141,14 +140,29 @@ class Search extends Component {
                   }
                   receivedTransactionList.push(transaction);
                 }
+                
                 if(counter === 1){
                   this.props.updateNewTransactionList([]);
                   this.props.updateOldTransactionList(receivedTransactionList);
                   this.props.updateAllTransactionList(receivedTransactionList);
                 }
                 else{
+                  // test new transaction feature:
+                  // receivedTransactionList.unshift({
+                  //   'inputs': [],
+                  //   'out': [],
+                  //   'date': 'Mar-22-2019',
+                  //   'time': '15:22:00',
+                  //   'hash': 'jdsfbsbdjsbdjsabdjsabd',
+                  //   'visible': false,
+                  //   'value': 10,
+                  //   'spent': true
+                  // });
+                  var newTransactionList = [];
                   for(j=0; j<receivedTransactionList.length; j++){
-                    if(receivedTransactionList[j] !== this.props.allTransactionList[0]){
+                    // console.log(receivedTransactionList[j]);
+                    // console.log(this.props.allTransactionList[0]);
+                    if(receivedTransactionList[j].hash !== this.props.allTransactionList[0].hash){
                       newTransactionList.push(receivedTransactionList[j]);
                     }
                     else{
@@ -158,6 +172,7 @@ class Search extends Component {
                   this.props.updateNewTransactionList(newTransactionList);
                   this.props.updateOldTransactionList(this.props.allTransactionList);
                   this.props.updateAllTransactionList(receivedTransactionList); 
+                  // console.log(newTransactionList);
                 }      
               }
             }

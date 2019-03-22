@@ -73,8 +73,8 @@ class Details extends Component {
                             <div className="account-hash160">
                                 <b>Hash 160:</b> {this.props.addressHash}
                             </div>
-                            <div className="account-details-left-section-empty-block">
-                            &nbsp;
+                            <div className="account-n_tx">
+                                <b>No. Transactions:</b> {this.props.n_tx}
                             </div>
                         </div>
                         <div className="account-details-right-section">

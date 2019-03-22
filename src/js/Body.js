@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import '../css/Body.css';
 import Search from './Search.js';
 import Details from './Details.js';
-import bg from '../media/bg1.png'
 
 class Body extends Component {
     constructor(props) {
@@ -149,7 +148,6 @@ class Body extends Component {
     render() {
       return (
         <div className="body">
-          {/* <img className="Background-image" src={bg}/> */}
           <div className="content">
             <Search
               updateEnteredBitcoinAddress={this.updateEnteredBitcoinAddress}
@@ -196,6 +194,7 @@ class Body extends Component {
               totalReceived={this.state.totalReceived}
               totalSent={this.state.totalSent}
               balance={this.state.balance}
+              n_tx={this.state.n_tx}
               oldTransactionList={this.state.oldTransactionList}
               newTransactionList={this.state.newTransactionList}
               emptySearch={this.state.emptySearch}

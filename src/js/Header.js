@@ -6,7 +6,7 @@ class Header extends Component {
       return (
         <div className="header">
             <header className="App-header">
-                <div>
+                <div className="header-text">
                     Front-end Engineer Code Challenge
                 </div>
             </header>

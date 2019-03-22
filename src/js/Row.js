@@ -7,12 +7,12 @@ class Row extends Component {
     }
 
     render() {
-        var rowClass = (this.props.transaction.visible ? "row visible" : "row")
+        var newRowClass = (this.props.isNew ? 'row new-row' : 'row')
+        var rowClass = (this.props.transaction.visible ? newRowClass+" visible" : newRowClass)
       return (
         <div className={rowClass} onClick={() => {this.props.toggleTransactionVisibility(this.props.id, this.props.isNew)}}>
             <div className="transaction-date">
                 {this.props.transaction.date}
-                {(this.props.isNew ? '(NEW)' : '')}
             </div>
             <div className="transaction-time">
                 {this.props.transaction.time}

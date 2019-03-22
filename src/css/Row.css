@@ -1,12 +1,15 @@
 .row {
     margin-left: 10vw;
     margin-right: 10vw;
-    /* margin-bottom: 2vh;  */
     width: 80vw;
     height: 10vh;
     line-height: 10vh;
     color: #5f5f5f;
-    background-color: white
+    background-color: white;
+}
+
+.new-row {
+    box-shadow: 0 0 2vw rgb(16, 173, 228);
 }
 
 .visible {
